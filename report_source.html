@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US"> 
+		<head> 
+			<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+			<meta http-equiv="Content-Style-Type" content="text/css" /> 
+			<meta http-equiv="Content-Script-Type" content="text/javascript" /> 
+			<title>Saynt Example Report</title> 
+		</head>
+		
+		
+<body>
+
+<h2>Saynt Example Report</h2>
+<p>This page should help you get Saynt up and running quickly.</p>
+
+<h3>Login Details</h3>
+
+<p>First, you need to edit the <b>config/login.php</b> file to include the appropiate details of:</p>
+<ul><li>Your Google Analytics account</li><li>The database you want Saynt to connect to</li></ul>
+<p>Enter all values as strings e.g. <b>define('ga_user', 'example@gmail.com' );</b></p>
+
+<h4>config/login.php</h4>
+<pre>
+&lt;?php
+
+define('ga_user', *email address* );
+define('ga_pass', *password* );
+define('db_type', *e.g. mysql* );
+define('db_server', *e.g. localhost* );
+define('db_name', *database name* );
+define('db_user', *username* );
+define('db_pass', *password* );
+
+?>
+</pre>
+
+<h3>Report File</h3>
+
+<p>Next, you need to write the body of the report itself. First, make sure you <b>require</b> the login file you've just edited, as well as the two classes listed.</p>
+<p>Next, pass all your parameters into an associative array, here called <b>&#36;data</b>. Note that the 'profile' and 'dates' values should be arrays themselves, and consist of <ul><li><b>(ProfileName, ProfileId)</b> and</li><li><b>(StartDate, EndDate)</b> respectively.</li></ul> Metrics and dimensions can be arrays too, and will appear in the order you list them. All other parameters should be single values.</p>
+<p>Finally, instantiate a new Saynt gdx object, passing it your <b>&#36;data</b>. Then call the <b>report</b> method.</p>
+
+<h4>report.php</h4>
+<pre>
+&lt;?php
+
+// LOGINS
+require 'config/login.php';
+
+// IMPORT CLASSES
+require_once 'scripts/gapi.class.php';
+require_once 'scripts/gdx.class.php';
+
+// DATA
+$data['profile'] = array("My Cool Site", xxxxxxxx);
+$data['format'] = "table";
+$data['dbTable'] = null;
+$data['dates']= array('2010-02-15', '2010-02-24');
+$data['dimensions'] = array('pagePath');
+$data['metrics'] = array('entrances', 'uniquePageViews', 'pageViews');
+$data['sort'] = '-pageViews';
+$data['max'] = 100;
+$data['filters'] = null;
+$data['segment'] = null;
+
+// RUN
+$myGdx = new gdx($data);
+$myGdx->report();
+
+?>
+</pre>
+
+<h3>Usage</h3>
+
+<p>Was that it? Yes! Either include the report directly in your code, or keep it seperate and <b>require</b> it like so:</p>
+
+<h4>foo.php</h4>
+<pre>
+&lt;?php
+	require 'foo.php';
+?>
+</pre>
+
+<p>Visit foo.php, and you should see your report! Of course, you can loop through this script replacing variables if you want to generate more reports. Can you see the potential? ;)</p>
+
+<p>See the <a href="help.php">Help<a/> file for further information on valid parameters, writing to databases,  the user friendly helper API, and other things you can do with Saynt.</p>
+
+</body>
+</html>
