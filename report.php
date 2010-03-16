@@ -8,7 +8,7 @@ require_once 'scripts/gapi.class.php';
 require_once 'scripts/gdx.class.php';
 
 // DATA
-$data['profile'] = array("Newbeat", 21673320);
+$data['profile'] = array("Newbeat", 99999999);
 $data['format'] = "table";
 $data['dbTable'] = null;
 $data['dates']= array('2010-02-15', '2010-02-24');

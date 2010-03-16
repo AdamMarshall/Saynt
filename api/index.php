@@ -12,7 +12,7 @@ require_once '../scripts/gdx_helper.class.php';
 
 $defaults = array(	
 	'dates' => array("2010-02-01", "2010-02-22"), 
-	'profile' => array("Newbeat", 21673320) 
+	'profile' => array("My Cool Website", 99999999) 
 );
 
 $locked = array(
