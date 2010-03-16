@@ -1,0 +1,11 @@
+format,table,csv,write
+max,%%INT%%
+dates,%%ANY%%
+metrics,visits,visitors,entrances,bounces,pageviews
+dimensions,source,medium,country,city,pagePath,landingPagePath
+sort,%%ANY%%
+filters,%%ANY%%
+segment,%%ANY%%
+dates,%%ANY%%
+dbTable,%%ANY%%
+profile, %%ANY%%
